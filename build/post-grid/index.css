@@ -1,0 +1,41 @@
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/post-grid/editor.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-create-block-post-grid {
+  border: 1px dotted #f00;
+}
+.accordion {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+.accordion-header {
+  padding: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
+}
+.accordion-header:hover {
+  background: #eee;
+}
+.accordion-group {
+  display: flex;
+}
+.accordion-body {
+  padding: 15px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+/* Rotate icon when open */
+
+/*# sourceMappingURL=index.css.map*/
