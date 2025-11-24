@@ -68,14 +68,7 @@ export default function Edit({attributes, setAttributes}) {
 						onChange={ onChangeSelectField }
 					/>
 
-					<RangeControl
-						label="Title Max Length"
-						value={titleMaxLength}
-						onChange={ onChangeRangeField }
-						min={5}
-						max={30}
-						__nextHasNoMarginBottom
-					/>
+					
 					<div className="accordion">
 						<div className="accordion-item">
 
@@ -98,7 +91,14 @@ export default function Edit({attributes, setAttributes}) {
 
 							{isOpen && (
 								<div className="accordion-body">
-									<p>Accordion content goes here…</p>
+									<RangeControl
+										label="Title Max Length"
+										value={titleMaxLength}
+										onChange={ onChangeRangeField }
+										min={5}
+										max={30}
+										__nextHasNoMarginBottom
+									/>
 								</div>
 							)}
 

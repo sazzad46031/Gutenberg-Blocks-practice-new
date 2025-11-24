@@ -12,7 +12,7 @@
 .accordion {
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 .accordion-item {
   border-bottom: 1px solid #ddd;
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f7f7f7;
+  background: #eef4fa;
 }
 .accordion-header:hover {
   background: #eee;
@@ -36,6 +36,5 @@
   background: #fff;
   border-top: 1px solid #ddd;
 }
-/* Rotate icon when open */
 
 /*# sourceMappingURL=index.css.map*/

@@ -1225,13 +1225,6 @@ function Edit({
             label: 'Right'
           }],
           onChange: onChangeSelectField
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: "Title Max Length",
-          value: titleMaxLength,
-          onChange: onChangeRangeField,
-          min: 5,
-          max: 30,
-          __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "accordion",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -1253,8 +1246,13 @@ function Edit({
               })]
             }), isOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "accordion-body",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                children: "Accordion content goes here\u2026"
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+                label: "Title Max Length",
+                value: titleMaxLength,
+                onChange: onChangeRangeField,
+                min: 5,
+                max: 30,
+                __nextHasNoMarginBottom: true
               })
             })]
           })
