@@ -18,13 +18,29 @@ return array(
 				'type' => 'string',
 				'default' => 'left'
 			),
-			'toggleField' => array(
+			'toggleTitle' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'toggleDesc' => array(
 				'type' => 'boolean',
 				'default' => true
 			),
 			'titleMaxLength' => array(
 				'type' => 'number',
 				'default' => 10
+			),
+			'descMaxLength' => array(
+				'type' => 'number',
+				'default' => 150
+			),
+			'titleTag' => array(
+				'type' => 'string',
+				'default' => 'h3'
+			),
+			'titleColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
 			)
 		),
 		'supports' => array(

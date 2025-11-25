@@ -1124,7 +1124,7 @@ function SlWrench (props) {
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/post-grid","version":"0.1.0","title":"Post Grid","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"selectField":{"type":"string","default":"left"},"toggleField":{"type":"boolean","default":true},"titleMaxLength":{"type":"number","default":10}},"supports":{"html":false,"color":{"background":true,"text":true},"align":["wide","full"]},"textdomain":"post-grid","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/post-grid","version":"0.1.0","title":"Post Grid","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"selectField":{"type":"string","default":"left"},"toggleTitle":{"type":"boolean","default":true},"toggleDesc":{"type":"boolean","default":true},"titleMaxLength":{"type":"number","default":10},"descMaxLength":{"type":"number","default":150},"titleTag":{"type":"string","default":"h3"},"titleColor":{"type":"string","default":"#000000"}},"supports":{"html":false,"color":{"background":true,"text":true},"align":["wide","full"]},"textdomain":"post-grid","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -1157,9 +1157,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const renderTemplates = (alignment, toggleField, titleMaxLength) => {
+const renderTemplates = (alignment, toggleTitle, toggleDesc, titleMaxLength, descMaxLength, titleTag, titleColor) => {
   const fullTitle = "Action Camera made by sony";
   const trimmedtitle = fullTitle.length > titleMaxLength ? fullTitle.substring(0, titleMaxLength) + '...' : fullTitle;
+  const fullDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec eros id libero cursus finibus. Phasellus luctus, augue eu tempus fringilla, magna velit gravida arcu, in tristique tellus turpis vitae odio. Integer at justo sed sem consectetur vulputate non eget neque.";
+  const trimmedDesc = fullDesc.length > descMaxLength ? fullDesc.substring(0, descMaxLength) + '...' : fullDesc;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     style: {
       textAlign: alignment
@@ -1169,10 +1171,12 @@ const renderTemplates = (alignment, toggleField, titleMaxLength) => {
       alt: "Action Camera",
       width: "50%"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      children: [toggleField && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-        children: trimmedtitle
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-        children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec eros id libero cursus finibus. Phasellus luctus, augue eu tempus fringilla, magna velit gravida arcu, in tristique tellus turpis vitae odio. Integer at justo sed sem consectetur vulputate non eget neque."
+      children: [toggleTitle && React.createElement(titleTag, {
+        style: {
+          color: titleColor
+        }
+      }, trimmedtitle), toggleDesc && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+        children: trimmedDesc
       })]
     })]
   });
@@ -1183,29 +1187,55 @@ function Edit({
 }) {
   const {
     selectField,
-    toggleField,
-    titleMaxLength
+    toggleTitle,
+    toggleDesc,
+    titleMaxLength,
+    descMaxLength,
+    titleTag,
+    titleColor
   } = attributes;
-  const [isOpen, setIsOpen] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const [isOpenTitle, setIsOpenTitle] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const [isOpenDesc, setIsOpenDesc] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const [activeTabTitle, setActiveTabTitle] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)("settings");
+  const colors = [{
+    name: 'red',
+    color: '#D91919'
+  }, {
+    name: 'white',
+    color: '#fff'
+  }, {
+    name: 'black',
+    color: '#000'
+  }];
   function onChangeSelectField(newValue) {
     setAttributes({
       selectField: newValue
     });
   }
-  function onChangeToggleField(newValue) {
+  function onChangeToggleTitle(newValue) {
     setAttributes({
-      toggleField: newValue
+      toggleTitle: newValue
     });
   }
-  function onChangeRangeField(newValue) {
+  function onChangeToggleDesc(newValue) {
+    setAttributes({
+      toggleDesc: newValue
+    });
+  }
+  function onChangeRangeTitle(newValue) {
     setAttributes({
       titleMaxLength: newValue
+    });
+  }
+  function onChangeRangeDesc(newValue) {
+    setAttributes({
+      descMaxLength: newValue
     });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("section", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      children: renderTemplates(selectField, toggleField, titleMaxLength)
+      children: renderTemplates(selectField, toggleTitle, toggleDesc, titleMaxLength, descMaxLength, titleTag, titleColor)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: "Settings",
@@ -1231,27 +1261,125 @@ function Edit({
             className: "accordion-item",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "accordion-header",
-              onClick: () => setIsOpen(!isOpen),
+              onClick: () => setIsOpenTitle(!isOpenTitle),
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
                 className: "accordion-title",
                 children: "Title"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "accordion-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-                  checked: toggleField,
-                  onChange: onChangeToggleField
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  onClick: e => e.stopPropagation(),
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+                    checked: toggleTitle,
+                    onChange: onChangeToggleTitle
+                  })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                  children: isOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_icons_sl__WEBPACK_IMPORTED_MODULE_3__.SlArrowUp, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_icons_sl__WEBPACK_IMPORTED_MODULE_3__.SlArrowDown, {})
+                  children: isOpenTitle ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_icons_sl__WEBPACK_IMPORTED_MODULE_3__.SlArrowUp, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_icons_sl__WEBPACK_IMPORTED_MODULE_3__.SlArrowDown, {})
                 })]
               })]
-            }), isOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            }), isOpenTitle && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+              className: "accordion-body",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "gs-tabs",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "gs-tab-buttons",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                    className: activeTabTitle === "settings" ? "active" : "",
+                    onClick: () => setActiveTabTitle("settings"),
+                    children: "Settings"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                    className: activeTabTitle === "style" ? "active" : "",
+                    onClick: () => setActiveTabTitle("style"),
+                    children: "Style"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "gs-tab-content",
+                  children: [activeTabTitle === "settings" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+                      label: "Title Tag",
+                      value: titleTag,
+                      options: [{
+                        label: 'H1',
+                        value: 'h1'
+                      }, {
+                        label: 'H2',
+                        value: 'h2'
+                      }, {
+                        label: 'H3',
+                        value: 'h3'
+                      }, {
+                        label: 'H4',
+                        value: 'h4'
+                      }, {
+                        label: 'H5',
+                        value: 'h5'
+                      }, {
+                        label: 'H6',
+                        value: 'h6'
+                      }, {
+                        label: 'P',
+                        value: 'p'
+                      }, {
+                        label: 'Span',
+                        value: 'span'
+                      }, {
+                        label: 'Div',
+                        value: 'div'
+                      }],
+                      onChange: newValue => setAttributes({
+                        titleTag: newValue
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+                      label: "Title Max Length",
+                      value: titleMaxLength,
+                      onChange: onChangeRangeTitle,
+                      min: 5,
+                      max: 30,
+                      __nextHasNoMarginBottom: true
+                    })]
+                  }), activeTabTitle === "style" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+                      colors: colors,
+                      value: titleColor,
+                      onChange: newColor => setAttributes({
+                        titleColor: newColor
+                      })
+                    })
+                  })]
+                })]
+              })
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "accordion",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            className: "accordion-item",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "accordion-header",
+              onClick: () => setIsOpenDesc(!isOpenDesc),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+                className: "accordion-title",
+                children: "Description"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "accordion-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  onClick: e => e.stopPropagation(),
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+                    checked: toggleDesc,
+                    onChange: onChangeToggleDesc
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                  children: isOpenDesc ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_icons_sl__WEBPACK_IMPORTED_MODULE_3__.SlArrowUp, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_icons_sl__WEBPACK_IMPORTED_MODULE_3__.SlArrowDown, {})
+                })]
+              })]
+            }), isOpenDesc && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "accordion-body",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
                 label: "Title Max Length",
-                value: titleMaxLength,
-                onChange: onChangeRangeField,
-                min: 5,
-                max: 30,
+                value: descMaxLength,
+                onChange: onChangeRangeDesc,
+                min: 50,
+                max: 450,
                 __nextHasNoMarginBottom: true
               })
             })]

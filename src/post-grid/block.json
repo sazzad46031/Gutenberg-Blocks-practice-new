@@ -13,14 +13,31 @@
 			"type": "string",
 			"default": "left"
 		},
-		"toggleField": {
+		"toggleTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"toggleDesc": {
 			"type": "boolean",
 			"default": true
 		},
 		"titleMaxLength": {
 			"type" : "number",
 			"default": 10
-		} 
+		},
+		"descMaxLength": {
+			"type" : "number",
+			"default": 150
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#000000"
+		}
+  
 	},
 	"supports": {
 		"html": false,

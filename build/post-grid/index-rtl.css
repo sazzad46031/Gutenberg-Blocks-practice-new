@@ -12,27 +12,45 @@
 .accordion {
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-top: 20px;
 }
 .accordion-item {
   border-bottom: 1px solid #ddd;
 }
 .accordion-header {
-  padding: 14px;
+  padding: 14px 14px 0 14px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #eef4fa;
 }
-.accordion-header:hover {
-  background: #eee;
-}
 .accordion-group {
   display: flex;
 }
 .accordion-body {
-  padding: 15px;
+  padding: 0 15px 15px 15px;
   background: #fff;
   border-top: 1px solid #ddd;
+}
+.gs-tab-buttons {
+  display: flex;
+  justify-content: center;
+}
+.gs-tab-buttons button {
+  padding: 6px 8px;
+  background: #eef4fa;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.gs-tab-buttons button.active {
+  background: #000;
+  color: #fff;
+  border-color: #007cba;
+}
+.gs-tab-content {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
 }

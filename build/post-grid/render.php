@@ -1,13 +1,21 @@
 <?php
-	$alignment = $attributes['selectField'] ?? 'left';
-	$toggle    = $attributes['toggleField'] ?? true;
-	$max       = $attributes['titleMaxLength'] ?? 10;
+	$alignment      = $attributes['selectField'] ?? 'left';
+	$toggleTitle    = $attributes['toggleTitle'] ?? true;
+	$toggleDesc     = $attributes['toggleDesc'] ?? true;
+	$titleMaxLength = $attributes['titleMaxLength'] ?? 10;
+	$descMaxLength  = $attributes['descMaxLength'] ?? 150;
 
 	$full_title = "Action Camera made by Sony";
 
-	$trimmed_title = mb_strlen($full_title) > $max
-		? mb_substr($full_title, 0, $max) . '...'
+	$trimmed_title = mb_strlen($full_title) > $titleMaxLength
+		? mb_substr($full_title, 0, $titleMaxLength) . '...'
 		: $full_title;
+
+	$full_desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec eros id libero cursus finibus. Phasellus luctus, augue eu tempus fringilla, magna velit gravida arcu, in tristique tellus turpis vitae odio. Integer at justo sed sem consectetur vulputate non eget neque.";
+
+	$trimmed_desc = mb_strlen($full_desc) > $descMaxLength
+		? mb_substr($full_desc, 0, $descMaxLength) . '...'
+		: $full_desc;	
 
 	?>
 
@@ -19,11 +27,13 @@
 		/>
 
 		<div>
-			<?php if ( $toggle ) : ?>
+			<?php if ( $toggleTitle ) : ?>
 				<h3><?php echo esc_html($trimmed_title); ?></h3>
 			<?php endif; ?>
-
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec eros id libero cursus finibus. Phasellus luctus, augue eu tempus fringilla, magna velit gravida arcu, in tristique tellus turpis vitae odio. Integer at justo sed sem consectetur vulputate non eget neque.</p>
+			<?php if ( $toggleDesc ) : ?>
+				<h3><?php echo esc_html($trimmed_desc); ?></h3>
+			<?php endif; ?>
+			
 		</div>
 	</section>
 
