@@ -40,7 +40,7 @@ return array(
 			),
 			'titleColor' => array(
 				'type' => 'string',
-				'default' => '#000000'
+				'default' => '#fff'
 			)
 		),
 		'supports' => array(
